@@ -17,6 +17,7 @@ import {
 } from "@nextui-org/react";
 import { cn } from "@nextui-org/react";
 import Image from "next/image";
+import { SignedOut, SignInButton, SignUpButton } from "@clerk/nextjs";
 
 const menuItems = [
   "About",
@@ -85,18 +86,28 @@ export default function Component(props: NavbarProps) {
       {/* Right Content */}
       <NavbarContent className="hidden md:flex" justify="end">
         <NavbarItem className="ml-2 !flex gap-2">
-          <Button className="text-default-500" radius="full" variant="light">
-            Login
-          </Button>
-          <Button
-            className="bg-foreground font-medium text-background"
-            color="secondary"
-            // endContent={<Icon icon="solar:alt-arrow-right-linear" />}
-            radius="full"
-            variant="flat"
-          >
-            Get Started
-          </Button>
+          <SignedOut>
+            <SignInButton>
+              <Button
+                className="text-default-500"
+                radius="full"
+                variant="light"
+              >
+                Sign In
+              </Button>
+            </SignInButton>
+          </SignedOut>
+          <SignUpButton>
+            <Button
+              className="bg-foreground font-medium text-background"
+              color="secondary"
+              // endContent={<Icon icon="solar:alt-arrow-right-linear" />}
+              radius="full"
+              variant="flat"
+            >
+              Get Started
+            </Button>
+          </SignUpButton>
         </NavbarItem>
       </NavbarContent>
 
@@ -104,9 +115,13 @@ export default function Component(props: NavbarProps) {
 
       <NavbarMenu className="top-[calc(var(--navbar-height)_-_1px)] max-h-fit bg-default-200/50 pb-6 pt-6 shadow-medium backdrop-blur-md backdrop-saturate-150 dark:bg-default-100/50">
         <NavbarMenuItem>
-          <Button fullWidth as={Link} href="/#" variant="faded">
-            Sign In
-          </Button>
+          <SignedOut>
+            <SignInButton>
+              <Button fullWidth as={Link} href="/#" variant="faded">
+                Sign In
+              </Button>
+            </SignInButton>
+          </SignedOut>
         </NavbarMenuItem>
         <NavbarMenuItem className="mb-4">
           <Button
